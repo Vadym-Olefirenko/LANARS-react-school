@@ -1,6 +1,6 @@
 export interface PhotoInterface {
     date: number;
-    description: string | undefined;
+    description: string;
     image: string;
     size: number;
     type: string;
