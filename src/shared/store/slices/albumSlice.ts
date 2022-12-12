@@ -1,8 +1,10 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, AnyAction } from '@reduxjs/toolkit';
 import API from 'core/services/API';
 
 import { IAlbums } from 'shared/interfaces/Album.interface';
 import { ISliceState } from 'shared/interfaces/SliceState.interface';
+
+import { isPendingAction, isRejectedAction, isFulfilledAction } from '../helpers';
 
 export const fetchAlbum = createAsyncThunk(
     'photo/fetchAlbum',
@@ -80,7 +82,20 @@ const albumSlice = createSlice({
             })
             .addCase(removeAlbum.fulfilled, (state, action) => {
                 state.data = state.data.filter( album => album.id !== action.payload.id);
-            });
+            })
+            .addMatcher(isPendingAction, state => {
+                state.status = 'pending';
+                state.error = null;
+            })
+            .addMatcher(isRejectedAction, (state, action: AnyAction) => {
+                state.status = 'failed';
+                state.error = action.payload.message;
+            })
+            .addMatcher(isFulfilledAction, state => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addDefaultCase(() => initialState);
     },
 });
 
