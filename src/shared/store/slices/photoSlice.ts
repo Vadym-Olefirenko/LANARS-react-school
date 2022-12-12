@@ -1,8 +1,10 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, AnyAction } from '@reduxjs/toolkit';
 import API from 'core/services/API';
 
 import { IPhoto } from 'shared/interfaces/Photo.interface';
 import { ISliceState } from 'shared/interfaces/SliceState.interface';
+
+import { isPendingAction, isRejectedAction, isFulfilledAction } from '../helpers';
 
 export const fetchPhoto = createAsyncThunk(
     'photo/fetchPhoto',
@@ -57,7 +59,7 @@ const initialState: ISliceState<IPhoto> = {
     status: 'idle',
     error: null,
     data: [],
-  };
+};
 
 const photoSlice = createSlice({
     name: 'photo',
@@ -78,7 +80,20 @@ const photoSlice = createSlice({
             })
             .addCase(removePhoto.fulfilled, (state, action) => {
                 state.data = state.data.filter( photo => photo.id !== action.payload.id);
-            });
+            })
+            .addMatcher(isPendingAction, state => {
+                state.status = 'pending';
+                state.error = null;
+            })
+            .addMatcher(isRejectedAction, (state, action: AnyAction) => {
+                state.status = 'failed';
+                state.error = action.payload.message;
+            })
+            .addMatcher(isFulfilledAction, state => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addDefaultCase(() => initialState);
     },
 });
 
