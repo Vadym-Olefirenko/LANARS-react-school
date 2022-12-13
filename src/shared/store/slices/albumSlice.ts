@@ -33,7 +33,7 @@ export const createAlbum = createAsyncThunk(
 
 export const updateAlbum = createAsyncThunk(
     'photo/updateAlbum',
-    async (item: IAlbums, {rejectWithValue}) => {
+    async (item: Required<IAlbums>, {rejectWithValue}) => {
         try {
             const response = await API.patch('/api/albums', item) as IAlbums;
             return response;

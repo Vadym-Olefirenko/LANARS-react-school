@@ -11,7 +11,7 @@ export const fetchPhoto = createAsyncThunk(
     async (photoIds: number[], {rejectWithValue}) => {
         try {
             const queryParams = photoIds.length > 0 ? `?ids=${photoIds.join()}` : '';
-            const response = await API.get(`/api/photos${queryParams}`) as IPhoto[] | IPhoto;
+            const response = await API.get(`/api/photos${queryParams}`) as IPhoto;
             return response;
         } catch (error) {
             return rejectWithValue(error);
@@ -33,7 +33,7 @@ export const createPhoto = createAsyncThunk(
 
 export const updatePhoto = createAsyncThunk(
     'photo/updatePhoto',
-    async (item: IPhoto, {rejectWithValue}) => {
+    async (item: Required<IPhoto>, {rejectWithValue}) => {
         try {
             const response = await API.patch('/api/photos', item) as IPhoto;
             return response;
