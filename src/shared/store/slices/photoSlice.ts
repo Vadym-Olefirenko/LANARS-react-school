@@ -11,7 +11,7 @@ export const fetchPhoto = createAsyncThunk(
     async (photoIds: number[], {rejectWithValue}) => {
         try {
             const queryParams = photoIds.length > 0 ? `?ids=${photoIds.join()}` : '';
-            const response = await API.get(`/api/photos${queryParams}`) as IPhoto;
+            const response = await API.get(`/api/photos${queryParams}`) as IPhoto[] | IPhoto;
             return response;
         } catch (error) {
             return rejectWithValue(error);
@@ -68,6 +68,7 @@ const photoSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchPhoto.fulfilled, (state, action) => {
+                console.log(action);
                 state.data = Array.isArray(action.payload) ? [...action.payload] : [action.payload];
             })
             .addCase(createPhoto.fulfilled, (state, action) => {
