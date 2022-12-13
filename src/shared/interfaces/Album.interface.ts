@@ -3,5 +3,5 @@ export interface IAlbums {
     description: string;
     photos: number[];
     title: string;
-    id: number;
+    id?: number;
 }
