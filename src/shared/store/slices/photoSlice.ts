@@ -68,7 +68,6 @@ const photoSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchPhoto.fulfilled, (state, action) => {
-                console.log(action);
                 state.data = Array.isArray(action.payload) ? [...action.payload] : [action.payload];
             })
             .addCase(createPhoto.fulfilled, (state, action) => {
