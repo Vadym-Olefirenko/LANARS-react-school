@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, AnyAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import API from 'core/services/API';
 
 import { IAlbums } from 'shared/interfaces/Album.interface';
