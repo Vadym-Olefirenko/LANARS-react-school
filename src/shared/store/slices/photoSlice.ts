@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, AnyAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import API from 'core/services/API';
 
 import { IPhoto } from 'shared/interfaces/Photo.interface';
@@ -10,7 +10,7 @@ import {
     isFulfilledAction,
     isPendingActionStatusManager,
     isFulfilledActionStatusManager,
-    isRejectedActionStatusManager
+    isRejectedActionStatusManager,
 } from '../helpers';
 
 export const fetchPhoto = createAsyncThunk(
