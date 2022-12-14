@@ -4,7 +4,14 @@ import API from 'core/services/API';
 import { IAlbums } from 'shared/interfaces/Album.interface';
 import { ISliceState } from 'shared/interfaces/SliceState.interface';
 
-import { isPendingAction, isRejectedAction, isFulfilledAction } from '../helpers';
+import {
+    isPendingAction,
+    isRejectedAction,
+    isFulfilledAction,
+    isPendingActionStatusManager,
+    isFulfilledActionStatusManager,
+    isRejectedActionStatusManager,
+} from '../helpers';
 
 export const fetchAlbum = createAsyncThunk(
     'photo/fetchAlbum',
@@ -83,18 +90,9 @@ const albumSlice = createSlice({
             .addCase(removeAlbum.fulfilled, (state, action) => {
                 state.data = state.data.filter( album => album.id !== action.payload.id);
             })
-            .addMatcher(isPendingAction, state => {
-                state.status = 'pending';
-                state.error = null;
-            })
-            .addMatcher(isRejectedAction, (state, action: AnyAction) => {
-                state.status = 'failed';
-                state.error = action.payload.message;
-            })
-            .addMatcher(isFulfilledAction, state => {
-                state.status = 'succeeded';
-                state.error = null;
-            })
+            .addMatcher(isPendingAction, isPendingActionStatusManager)
+            .addMatcher(isRejectedAction, isRejectedActionStatusManager)
+            .addMatcher(isFulfilledAction, isFulfilledActionStatusManager)
             .addDefaultCase(() => initialState);
     },
 });
