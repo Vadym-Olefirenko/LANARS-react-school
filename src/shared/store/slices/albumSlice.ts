@@ -14,7 +14,7 @@ import {
 } from '../helpers';
 
 export const fetchAlbum = createAsyncThunk(
-    'photo/fetchAlbum',
+    'album/fetchAlbum',
     async (albumIds: number[], {rejectWithValue}) => {
         try {
             const queryParams = albumIds.length > 0 ? `?ids=${albumIds.join()}` : '';
@@ -27,7 +27,7 @@ export const fetchAlbum = createAsyncThunk(
   );
 
 export const createAlbum = createAsyncThunk(
-    'photo/createAlbum',
+    'album/createAlbum',
     async (item: Omit<IAlbums, 'id'>, {rejectWithValue}) => {
         try {
             const response = await API.post('/api/albums', item) as IAlbums;
@@ -39,7 +39,7 @@ export const createAlbum = createAsyncThunk(
 );
 
 export const updateAlbum = createAsyncThunk(
-    'photo/updateAlbum',
+    'album/updateAlbum',
     async (item: Required<IAlbums>, {rejectWithValue}) => {
         try {
             const response = await API.patch('/api/albums', item) as IAlbums;
@@ -51,7 +51,7 @@ export const updateAlbum = createAsyncThunk(
 );
 
 export const removeAlbum = createAsyncThunk(
-    'photo/removeAlbum',
+    'album/removeAlbum',
     async (id: number[], {rejectWithValue}) => {
         try {
             const response = await API.delete(`/api/albums?ids=${id}`);
