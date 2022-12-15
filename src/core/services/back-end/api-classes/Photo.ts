@@ -41,14 +41,14 @@ export class Photo extends BackEndAbstract<PhotoEntity> {
   // }
 }
 
-class PhotoEntity {
+export class PhotoEntity {
   image: string;
   description = '';
   date = 0;
   size = 0;
   type = '';
   id?: number;
-  isFavorite = false;
+  isFavorite = true;
   
   constructor(data: PhotoEntity) {
     this.date = data.date;
