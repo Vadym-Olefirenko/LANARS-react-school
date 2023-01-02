@@ -11,15 +11,21 @@ import {
     isPendingActionStatusManager,
     isFulfilledActionStatusManager,
     isRejectedActionStatusManager,
+    multipleItemsGuard,
 } from '../helpers';
 
 export const fetchAlbum = createAsyncThunk(
     'album/fetchAlbum',
-    async (albumIds: number[], {rejectWithValue}) => {
+    async (albumIds: number[] | undefined, {rejectWithValue}) => {
         try {
-            const queryParams = albumIds.length > 0 ? `?ids=${albumIds.join()}` : '';
-            const response = await API.get(`/api/albums${queryParams}`) as IAlbums[] | IAlbums;
-            return response;
+            const queryParams = albumIds && albumIds.length > 0 ? `?ids=${albumIds.join()}` : '';
+            if (multipleItemsGuard(albumIds)) {
+                const response = await API.get(`/api/photos${queryParams}`) as IAlbums[];
+                return response;
+            } else {
+                const response = await API.get(`/api/photos${queryParams}`) as IAlbums;
+                return response;
+            }
         } catch (error) {
             return rejectWithValue(error);
         }
