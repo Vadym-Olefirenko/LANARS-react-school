@@ -11,17 +11,17 @@ export type ActionStateType = {
     error: null | string;
 };
 
-export function isPendingAction(action: AnyAction): action is PendingAction {
-    return action.type.endsWith('/pending');
-}
+export const isPendingAction = (param: string) => (action: AnyAction): action is PendingAction => {
+    return action.type.startsWith(param) && action.type.endsWith('/pending');
+};
 
-export function isRejectedAction(action: AnyAction): action is RejectedAction {
-    return action.type.endsWith('/rejected');
-}
+export const isRejectedAction = (param: string) => (action: AnyAction): action is RejectedAction => {
+    return action.type.startsWith(param) && action.type.endsWith('/rejected');
+};
 
-export function isFulfilledAction(action: AnyAction): action is FulfilledAction {
-    return action.type.endsWith('/fulfilled');
-}
+export const isFulfilledAction = (param: string) => (action: AnyAction): action is FulfilledAction => {
+    return action.type.startsWith(param) && action.type.endsWith('/fulfilled');
+};
 
 export function isPendingActionStatusManager(state: ActionStateType): void {
     state.status = 'pending';

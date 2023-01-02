@@ -88,9 +88,9 @@ const photoSlice = createSlice({
             .addCase(removePhoto.fulfilled, (state, action) => {
                 state.data = state.data.filter( photo => photo.id !== action.payload.id);
             })
-            .addMatcher(isPendingAction, isPendingActionStatusManager)
-            .addMatcher(isRejectedAction, isRejectedActionStatusManager)
-            .addMatcher(isFulfilledAction, isFulfilledActionStatusManager)
+            .addMatcher(isPendingAction('photo'), isPendingActionStatusManager)
+            .addMatcher(isRejectedAction('photo'), isRejectedActionStatusManager)
+            .addMatcher(isFulfilledAction('photo'), isFulfilledActionStatusManager)
             .addDefaultCase(() => initialState);
     },
 });

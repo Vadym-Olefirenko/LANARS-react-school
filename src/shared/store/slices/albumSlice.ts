@@ -90,9 +90,9 @@ const albumSlice = createSlice({
             .addCase(removeAlbum.fulfilled, (state, action) => {
                 state.data = state.data.filter( album => album.id !== action.payload.id);
             })
-            .addMatcher(isPendingAction, isPendingActionStatusManager)
-            .addMatcher(isRejectedAction, isRejectedActionStatusManager)
-            .addMatcher(isFulfilledAction, isFulfilledActionStatusManager)
+            .addMatcher(isPendingAction('album'), isPendingActionStatusManager)
+            .addMatcher(isRejectedAction('album'), isRejectedActionStatusManager)
+            .addMatcher(isFulfilledAction('album'), isFulfilledActionStatusManager)
             .addDefaultCase(() => initialState);
     },
 });
