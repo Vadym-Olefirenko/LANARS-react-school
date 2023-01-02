@@ -37,3 +37,11 @@ export function isRejectedActionStatusManager(state: ActionStateType, action: An
     state.status = 'failed';
     state.error = action.payload.message;
 }
+
+export const multipleItemsGuard = <T>(param: T): boolean => {
+    if (Array.isArray(param)) {
+        return param.length > 1 || param.length === 0;
+    } else {
+        return param === undefined;
+    }
+};
