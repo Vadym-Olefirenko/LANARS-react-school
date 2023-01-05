@@ -8,7 +8,7 @@ const Header = (): JSX.Element => {
     <AppBar
       position="static"
       sx={{
-        bgcolor: 'primary.light',
+        bgcolor: 'background.default',
         boxShadow: 'none',
         borderBottom: '1px solid',
         borderBottomColor: 'border.main',
@@ -17,8 +17,8 @@ const Header = (): JSX.Element => {
       <Toolbar sx={{
         // eslint-disable-next-line @typescript-eslint/naming-convention
         '&.MuiToolbar-root': {
-          pl: '40px',
-          pr: '40px',
+          pl: '0',
+          pr: '0',
         },
       }}>
         <MainLogo src={logo} />
