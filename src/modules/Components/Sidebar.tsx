@@ -24,7 +24,8 @@ const StyledListItemIcon = styled(ListItemIcon)({
 const Sidebar = (): JSX.Element => {
     return (
         <Box sx={{
-                paddingRight: '142px',
+                width: '40%',
+                maxWidth: 346,
                 height: 'calc(100vh - 64px)',
             }}>
             <nav>
