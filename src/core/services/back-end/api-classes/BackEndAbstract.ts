@@ -35,6 +35,11 @@ export abstract class BackEndAbstract<Entity extends object> {
     const values = await Storage.getAllValue(this.tableName);
     let filteredValues = values;
 
+    if (query.search) {
+      filteredValues = filteredValues?.filter(<T extends EntityAbstract & {title: string}>(value: T) => value.title.includes(query.search));
+      return filteredValues.splice(query.offset, query.limit);
+    }
+
     if (query.ids.length) {
       filteredValues = filteredValues?.filter((value: EntityAbstract) => query?.ids?.includes(value.id));
     }
