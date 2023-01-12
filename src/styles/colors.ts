@@ -11,5 +11,6 @@ export const colors = {
     },
     background: '#F5F5F5',
     borderColor: '#E5EDF2',
+    fieldsColor: '#6C7276',
   };
 

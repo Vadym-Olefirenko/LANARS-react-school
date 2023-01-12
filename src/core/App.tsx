@@ -7,12 +7,14 @@ import Sidebar from 'modules/Components/Sidebar';
 import Header from 'modules/Components/Header';
 
 import { styled } from '@mui/system';
+import Photos from 'modules/Components/Pages/Photos';
+import { Stack } from '@mui/material';
 
 const StyledContainer = styled(Container)({
     // eslint-disable-next-line @typescript-eslint/naming-convention
     '&.MuiContainer-root': {
-      pl: '40px',
-      pr: '40px',
+      paddingLeft: '0px',
+      paddingRight: '0px',
     },
 });
 
@@ -25,7 +27,10 @@ const App = (): JSX.Element => {
         </StyledContainer>
         <main>
           <StyledContainer>
-              <Sidebar/>
+              <Stack direction="row">
+                <Sidebar/>
+                <Photos/>
+              </Stack>
           </StyledContainer>
         </main>
       </Box>

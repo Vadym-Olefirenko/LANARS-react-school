@@ -26,6 +26,7 @@ const theme = createTheme({
         text: {
             primary: colors.text.primary,
             secondary: colors.text.secondary,
+            disabled: colors.fieldsColor,
         },
         border: {
             main: '#E5EDF2',
