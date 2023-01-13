@@ -6,53 +6,53 @@ import { styled } from '@mui/system';
 
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
 
-// import img1 from '../../../assets/images/placeholders/3029022.jpg';
-// import img2 from '../../../assets/images/placeholders/3029022.jpg';
-// import img3 from '../../../assets/images/placeholders/3029022.jpg';
-// import img4 from '../../../assets/images/placeholders/3029022.jpg';
+import img1 from '../../../assets/images/placeholders/3029022.jpg';
+import img2 from '../../../assets/images/placeholders/3029022.jpg';
+import img3 from '../../../assets/images/placeholders/3029022.jpg';
+import img4 from '../../../assets/images/placeholders/3029022.jpg';
 
-// const imagesArr = [
-//     {image: img1},
-//     {image: img2},
-//     {image: img3},
-//     {image: img4},
-//     {image: img1},
-//     {image: img2},
-//     {image: img3},
-//     {image: img4},
-//     {image: img1},
-//     {image: img2},
-//     {image: img3},
-//     {image: img4},
-//     {image: img1},
-//     {image: img2},
-//     {image: img3},
-//     {image: img4},
-//     {image: img1},
-//     {image: img2},
-//     {image: img3},
-//     {image: img4},
-//     {image: img1},
-//     {image: img2},
-//     {image: img3},
-//     {image: img4},
-//     {image: img1},
-//     {image: img2},
-//     {image: img3},
-//     {image: img4},
-//     {image: img1},
-//     {image: img2},
-//     {image: img3},
-//     {image: img4},
-//     {image: img1},
-//     {image: img2},
-//     {image: img3},
-//     {image: img4},
-//     {image: img1},
-//     {image: img2},
-//     {image: img3},
-//     {image: img4},
-// ];
+const imagesArr = [
+    {image: img1},
+    {image: img2},
+    {image: img3},
+    {image: img4},
+    {image: img1},
+    {image: img2},
+    {image: img3},
+    {image: img4},
+    {image: img1},
+    {image: img2},
+    {image: img3},
+    {image: img4},
+    {image: img1},
+    {image: img2},
+    {image: img3},
+    {image: img4},
+    {image: img1},
+    {image: img2},
+    {image: img3},
+    {image: img4},
+    {image: img1},
+    {image: img2},
+    {image: img3},
+    {image: img4},
+    {image: img1},
+    {image: img2},
+    {image: img3},
+    {image: img4},
+    {image: img1},
+    {image: img2},
+    {image: img3},
+    {image: img4},
+    {image: img1},
+    {image: img2},
+    {image: img3},
+    {image: img4},
+    {image: img1},
+    {image: img2},
+    {image: img3},
+    {image: img4},
+];
 
 const StyledInsertPhotoOutlinedIcon = styled(InsertPhotoOutlinedIcon)(({ theme }) =>({
     color: theme.palette.border.main,
@@ -66,7 +66,7 @@ const Photos = (): JSX.Element => {
     const [images, setImages] = useState<{ image: string }[]>([]);
 
     useEffect(() => {
-        setImages([]);
+        setImages(imagesArr);
     }, []);
 
     const allImages = images.map((item, index) => (
@@ -85,11 +85,15 @@ const Photos = (): JSX.Element => {
             height: 'calc(100vh - 64px)',
             maxWidth: '895px',
             width: '895px',
+            position: 'relative',
         }}>
-            {images.length > 0 ?
-            <ImageList sx={{ width: 892, height: 700 }} cols={6} rowHeight={142} gap={8}>
+            {images && images.length > 0 ?
+            <>
+            <ImageList sx={{ width: 892, height: 900 }} cols={6} rowHeight={142} gap={8}>
                 {allImages}
             </ImageList>
+            <UploadButton text={'UPLOAD PHOTO'}/>
+            </>
             :
             <>
             <NoContentPlug

@@ -6,32 +6,25 @@ import { Box, Container } from '@mui/system';
 import Sidebar from 'modules/Components/Sidebar';
 import Header from 'modules/Components/Header';
 
-import { styled } from '@mui/system';
 import Photos from 'modules/Components/Pages/Photos';
 import { Stack } from '@mui/material';
 
-const StyledContainer = styled(Container)({
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    '&.MuiContainer-root': {
-      paddingLeft: '0px',
-      paddingRight: '0px',
-    },
-});
+
 
 const App = (): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       <Box className="App" sx={{bgcolor: 'background.default'}}>
-        <StyledContainer>
+        <Container maxWidth="lg">
           <Header/>
-        </StyledContainer>
+        </Container>
         <main>
-          <StyledContainer>
+          <Container>
               <Stack direction="row">
                 <Sidebar/>
                 <Photos/>
               </Stack>
-          </StyledContainer>
+          </Container>
         </main>
       </Box>
     </ThemeProvider>
